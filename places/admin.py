@@ -3,8 +3,9 @@ from django.contrib.gis.admin import OSMGeoAdmin
 
 from places.models import Place
 
-class HospitalAdmin(OSMGeoAdmin):
+class PlaceAdmin(OSMGeoAdmin):
 	search_fields = ['name']
+	prepopulated_fields = {"slug": ("name",)}
 	# Admin map settings
 	layerswitcher = False
 	scrollable = False
