@@ -17,3 +17,7 @@ class ModelTests(TestCase):
             description='A big city in Nigeria.', 
             point = Point(3.416061, 6.448706)
         )
+        self.failIfEqual(lagos.pub_date, None)
+        lagos.save()
+
+# Could use a test yet to make sure the google maps projection is installed
