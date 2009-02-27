@@ -7,17 +7,22 @@ from places.models import Place
 
 class ModelTests(TestCase):
 
-    def createPlace(self):
-        """
-        Test whether the Place model can save an object.
-        """
-        lagos = Change.objects.create(
-            name = 'Lagos',
-            slug = 'lagos',
-            description='A big city in Nigeria.', 
-            point = Point(3.416061, 6.448706)
-        )
-        self.failIfEqual(lagos.pub_date, None)
-        lagos.save()
-
-# Could use a test yet to make sure the google maps projection is installed
+	def testCreatePlace(self):
+		"""
+		Test whether the Place model can save an object.
+		"""
+		lagos = Place.objects.create(
+			name = 'Lagos',
+			slug = 'lagos',
+			description='A big city in Nigeria.', 
+			point = Point(3.416061, 6.448706)
+		)
+		lagos.save()
+		
+		
+	def testGoogleMapsProjection(self):
+		"""
+		Test whether the Google Maps projection (SRID 900913) is available.
+		"""
+		point = Point(3.416061, 6.448706)
+		point.transform(900913)
